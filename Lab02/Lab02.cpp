@@ -95,7 +95,7 @@ int main()
         Подобные вычисления удобно производить с помощью цикла for.   */
     double vklad;
     float year, stavka;
-    cout << "Введите начальный вклад: " && cin >> vklad && cout << "Введите число лет: " && cin >> year && cout << "Введите процентную ставку: " && cin >> stavka;
+    cout << "Введите начальный вклад($): " && cin >> vklad && cout << "Введите число лет: " && cin >> year && cout << "Введите процентную ставку: " && cin >> stavka;
     stavka /= 100;
 
     for (register int i = 1; i <= year; i++)
@@ -165,7 +165,7 @@ int main()
                 shiling1 %= 20;
             }
             cout << "Сумма: " << pounds1 << '.' << shiling1 << '.' << pens1 << endl;
-            cout << "Продолжить сложение(y/n)?" << endl && cin >> prodolzhenie;
+            cout << "Продолжить сложение(y/n)?" << endl && cin >> prodolzhenie; // <-- #8
         }
         break;
     }
@@ -212,7 +212,7 @@ int main()
         Программа не должна быть сложной, и вычисление можно организовать с помощью простого цикла for. */
     int stul = 1, gost = 0;
     while (gost <= stul)
-        cout << "Количество стульев: " && cin >> stul && cout << "Количество гостей(больше, чем стульев): " && cin >> gost;
+        cout << "\nКоличество стульев: " && cin >> stul && cout << "Количество гостей(больше, чем стульев): " && cin >> gost;
     int variants = 1;
     for (stul; stul > 0; stul--)
         variants *= gost--;
@@ -224,7 +224,7 @@ int main()
         Для хранения найденного числа лет используйте переменную целого типа (можно отбросить дробную часть значения, полученного в результате расчета).
         Самостоятельно выберите тип цикла, подходящий для решения задачи.   */
     float ozhSum;
-    cout << "Введите начальный вклад: " && cin >> vklad && cout << "Ожидаемая сумма на счету: " && cin >> ozhSum && cout << "Введите процентную ставку: " && cin >> stavka;
+    cout << "\nВведите начальный вклад(%): " && cin >> vklad && cout << "Ожидаемая сумма на счету: " && cin >> ozhSum && cout << "Введите процентную ставку: " && cin >> stavka;
     year = 0;
     while (vklad <= ozhSum)
     {
@@ -249,4 +249,49 @@ int main()
         Пользователь должен сначала ввести первый операнд, затем знак операции и второй операнд.    
         После вычисления результата программа должна отобразить его на экране и запросить пользователя о его желании произвести еще одну операцию.  */
 
+
+    char prodolzhenie = 'y';
+    do
+    {
+        int a, b, c, d;
+        char dummychar, operachiya;
+
+        cout << "Введите первый операнд, операцию и второй операнд: ";
+        cin >> a >> dummychar >> b >> operachiya >> c >> dummychar >> d;
+
+        switch (operachiya)
+        {
+        case '+':
+        {
+            cout << "Сумма: " << (a * d + b * c) << '/' << (b * d) << endl;
+            cout << "Выполнить еще одну операцию (y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '-':
+        {
+            cout << "Разность: " << (a * d - b * c) << '/' << (b * d) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '/':
+        {
+            cout << "Частное: " << (a * c) << '/' << (b * d) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '*':
+        {
+            cout << "Произведение: " << (a * c) << '/' << (b * d) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        default:
+            cout << "Некорректный ввод" << endl;
+            break;
+        }
+    } while (prodolzhenie == 'y');
 }  
