@@ -114,10 +114,10 @@ int main()
         cout << " год вы получите: ";
     else
         cout << " лет вы получите: ";
-    cout << vklad << endl << endl;
+    cout << vklad << endl << endl; 
 
-    //#11, #8 
-/*	11) Создайте калькулятор, выполняющий действия над денежными суммами, выраженными в фунтах, шиллингах и пенсах (см. упражнения 10 и 12 предыдущего набора заданий).
+    //#8, #11 
+    /*	11) Создайте калькулятор, выполняющий действия над денежными суммами, выраженными в фунтах, шиллингах и пенсах (см. упражнения 10 и 12 предыдущего набора заданий).
         Калькулятор должен складывать и вычитать вводимые значения, а также производить умножение денежной суммы на вещественное число
         (операция умножения двух денежных сумм не имеет смысла, поскольку квадратных денежных единиц не существует. Деление одной денежной суммы на другую мы тоже не будем рассматривать).
         Организация взаимодействия с калькулятором описана в упражнении 4 этого набора упражнений.	
@@ -132,23 +132,23 @@ int main()
         Всего:   £8.13.0
         Продолжить (у/n)?
 
-        Для того чтобы сложить две суммы, вам необходимо учесть заем одного шиллинга в том случае, если число пенсов окажется больше 11, и одного фунта, если число шиллингов окажется больше 19.*/
+        Для того чтобы сложить две суммы, вам необходимо учесть заем одного шиллинга в том случае, если число пенсов окажется больше 11, и одного фунта, если число шиллингов окажется больше 19.   */
+    char tochka;
+    int pounds1, shiling1, pens1;
+    cout << "Введите сумму: " && cin >> pounds1 >> tochka >> shiling1 >> tochka >> pens1;
 
-    k = 0;
-    while (k != 1 && k != 2 && k != 3)
-        cout << "Выберите действие: '1' - сложение, '2' - разность, '3' - умножение на вещественное число" << endl && cin >> k;
+    char operachiya = ' ';
+    while (operachiya != '+' && operachiya != '-' && operachiya != '*')
+        cout << "Выберите действие: '+' - сложение, '-' - разность, '*' - умножение на вещественное число" << endl && cin >> operachiya;
 
-    switch (k)
+    switch (operachiya)
     {
-
-    case 1:
+    case '+':
     {
         char prodolzhenie = 'y';
         while (prodolzhenie == 'y')
         {
-            char tochka;
-            int pounds1, shiling1, pens1, pounds2, shiling2, pens2;
-            cout << "Введите первую сумму: " && cin >> pounds1 >> tochka >> shiling1 >> tochka >> pens1;
+            int pounds2, shiling2, pens2;
             cout << "Введите вторую сумму: " && cin >> pounds2 >> tochka >> shiling2 >> tochka >> pens2;
             pens1 += pens2;
             shiling1 += shiling2;
@@ -170,11 +170,9 @@ int main()
         break;
     }
 
-    case 2:
+    case '-':
     {
-        char tochka;
-        int pounds1, shiling1, pens1, pounds2, shiling2, pens2;
-        cout << "Введите первую сумму: " && cin >> pounds1 >> tochka >> shiling1 >> tochka >> pens1;
+        int pounds2, shiling2, pens2;
         cout << "Введите вторую сумму: " && cin >> pounds2 >> tochka >> shiling2 >> tochka >> pens2;
 
         int sum1 = pounds1 * 20 * 12 + shiling1 * 12 + pens1;
@@ -188,23 +186,19 @@ int main()
         break;
     }
 
-    case 3:
+    case '*':
     {
-        char tochka;
-        int pounds, shiling, pens;
         float mnozhitel;
-        cout << "Введите сумму: " && cin >> pounds >> tochka >> shiling >> tochka >> pens;
         cout << "Умножить на: " && cin >> mnozhitel;
 
-        int sum = pounds * 20 * 12 + shiling * 12 + pens;
+        int sum = pounds1 * 20 * 12 + shiling1 * 12 + pens1;
         sum *= mnozhitel;
-        pounds = sum / 240;
-        shiling = (sum % 240) / 12;
-        pens = sum - pounds * 20 * 12 - shiling * 12;
+        pounds1 = sum / 240;
+        shiling1 = (sum % 240) / 12;
+        pens1 = sum - pounds1 * 20 * 12 - shiling1 * 12;
 
-        cout << "Произведение равно: " << pounds << "." << shiling << "." << pens << endl << endl;
+        cout << "Произведение равно: " << pounds1 << "." << shiling1 << "." << pens1 << endl << endl;
     }
-
     default:
         break;
     }
