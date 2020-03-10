@@ -1,40 +1,58 @@
 ﻿#include <iostream>
 using namespace std;
 
-struct employee
-{
-    int numberEmployee;
-    float posobiye;
-};
+enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a', executive = 'e', researcher = 'r' };
 
 struct date
 {
     int day, month, year;
 };
 
-enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a', executive = 'e', researcher = 'r' };
+struct employee
+{
+    int numberEmployee;
+    float zarplata;
+    date date_IN_STRUCT_employee;
+    dolzhnost dolzhnost_IN_STRUCT_employee;
+};
 
 int main()
 {
     setlocale(LC_ALL, "ru");
-    //#4
-    /*  Создайте структуру с именем employee, содержащую два поля: номер сотрудника типа int и величину его пособия в долларах типа float.
-        Запросите с клавиатуры данные о трех сотрудниках, сохраните их в трех структурных переменных типа employee и выведите информацию о каждом из сотрудников на экран.  */
-    employee s1, s2, s3;
-    cout << "Введите данные о трех сотрудниках: номер сотрудника и величину его пособия (для каждого сотрудника вводить данные через пробел)" << endl;
-    cout << "Первый сотрудник: " && cin >> s1.numberEmployee >> s1.posobiye&&
-        cout << "Второй сотрудник: " && cin >> s2.numberEmployee >> s2.posobiye&&
-        cout << "Третий сотрудник: " && cin >> s3.numberEmployee >> s3.posobiye;
+    //#4, #7
+    /*  4) Создайте структуру с именем employee, содержащую два поля: номер сотрудника типа int и величину его пособия в долларах типа float.
+            Запросите с клавиатуры данные о трех сотрудниках, сохраните их в трех структурных переменных типа employee и выведите информацию о каждом из сотрудников на экран.
 
-    cout << "\nСотрудник №" << s1.numberEmployee << " получает " << s1.posobiye << '$'
-        << "\nСотрудник №" << s2.numberEmployee << " получает " << s2.posobiye << '$'
-        << "\nСотрудник №" << s3.numberEmployee << " получает " << s3.posobiye << '$' << endl << endl;
+        7) Добавьте поля типа enum etype (см. упражнение 6) и struct date (см. упражнение 5) в структуру employee из упражнения 4.
+            Организуйте программу таким образом, чтобы пользователь вводил 4 пункта данных о каждом из трех сотрудников: его номер, величину зарплаты, его должность и дату принятия на работу. 
+            Программа должна хранить введенные значения в трех переменных типа employee и выводить их содержимое на экран.  */
+    employee s1, s2, s3;
+    char bukva, symbol;
+    cout << "Введите данные о трех сотрудниках: его номер, величину зарплаты, его должность и дату принятия на работу" << endl;
+    
+    cout << "\aПервый сотрудник" << endl;
+    cout << "Номер и зарплата : " && cin >> s1.numberEmployee >> s1.zarplata;
+    cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
+    cout << "Дата принятия на работу: " && cin >> s1.date_IN_STRUCT_employee.day >> symbol >> s1.date_IN_STRUCT_employee.month >> symbol >> s1.date_IN_STRUCT_employee.year;
+
+    cout << "\aВторой сотрудник" << endl;
+    cout << "Номер и зарплата : " && cin >> s2.numberEmployee >> s2.zarplata;
+    cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
+    cout << "Дата принятия на работу: " && cin >> s2.date_IN_STRUCT_employee.day >> symbol >> s2.date_IN_STRUCT_employee.month >> symbol >> s2.date_IN_STRUCT_employee.year;
+
+    cout << "\aТретий сотрудник" << endl;
+    cout << "Номер и зарплата : " && cin >> s3.numberEmployee >> s3.zarplata;
+    cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
+    cout << "Дата принятия на работу: " && cin >> s3.date_IN_STRUCT_employee.day >> symbol >> s3.date_IN_STRUCT_employee.month >> symbol >> s3.date_IN_STRUCT_employee.year;
+
+
+    //cout << "\nСотрудник №" << s1.numberEmployee << " получает " << s1.zarplata << '$';
+        
 
     //#5
     /*  Создайте структуру типа date, содержащую три поля типа int: месяц, день и год. Попросите пользователя ввести день, месяц и год в формате 31/12/2002,
         сохраните введенное значение в структурной переменной, а затем извлеките данные из этой переменной и выведите их на экран в том же формате, в каком они вводились.  */
     date date1;
-    char symbol;
     cout << "Введите дату в формате '31/12/2002'" << endl;
     cin >> date1.day >> symbol >> date1.month >> symbol >> date1.year;
     cout << date1.day << symbol << date1.month << symbol << date1.year << endl;
@@ -54,7 +72,6 @@ int main()
 
         Возможно, вам понадобится два ветвления switch: одно — для ввода значения, другое — для вывода. */
     dolzhnost worker;
-    char bukva;
     cout << "\nВведите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
     switch (bukva)
     {
@@ -98,10 +115,4 @@ int main()
         cout << "Ошибка ввода" << endl;
         break;
     }
-
-    //#7
-    /*  Добавьте поля типа enum etype (см. упражнение 6) и struct date (см. упражнение 5) в структуру employee из упражнения 4.
-        Организуйте программу таким образом, чтобы пользователь вводил 4 пункта данных о каждом из трех сотрудников: его номер, величину зарплаты, его должность и дату принятия на работу. 
-        Программа должна хранить введенные значения в трех переменных типа employee и выводить их содержимое на экран.  */
-
 }
