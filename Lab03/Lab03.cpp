@@ -3,11 +3,8 @@ using namespace std;
 
 enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a', executive = 'e', researcher = 'r' };
 
-struct date
-{
-    int day, month, year;
-};
-
+struct date { int day, month, year; };
+struct fraction { int chislitel, znamenatel; };
 struct employee
 {
     int numberEmployee;
@@ -15,6 +12,7 @@ struct employee
     date date_IN_STRUCT_employee;
     dolzhnost dolzhnost_IN_STRUCT_employee;
 };
+
 
 void VvodDannihSotrudnika(employee& rab);
 string VivodPolnRabotaName(employee& rab);
@@ -111,9 +109,21 @@ int main()
     }
 
     //#8
-    /*  Вернитесь к упражнению 9 комплекта заданий 2. В этом упражнении требуется написать программу, которая хранит значения двух дробей в виде числителя и знаменателя, 
+    /*  Вернитесь к упражнению 9 комплекта заданий 1. В этом упражнении требуется написать программу, которая хранит значения двух дробей в виде числителя и знаменателя, 
         а затем складывает эти дроби согласно арифметическому правилу. Измените эту программу так, чтобы значения дробей хранились в структуре fraction, состоящей из двух полей типа int,
         предназначенных для хранения числителя и знаменателя. Все значения дробей должны храниться в переменных типа fraction.  */
+    fraction drob1, drob2;
+    cout << "Введите первую дробь: " && cin >> drob1.chislitel >> symbol >> drob1.znamenatel;
+    cout << "Введите вторую дробь: " && cin >> drob2.chislitel >> symbol >> drob2.znamenatel;
+    cout << "Сумма дробей: " << drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel << symbol << drob1.znamenatel * drob2.znamenatel << endl << endl;
+
+    //#9
+    /*  Создайте структуру с именем time. Три ее поля, имеющие тип int. будут называться hours, minutes и seconds. 
+        Напишите программу, которая просит пользователя ввести время в формате часы, минуты, секунды. 
+        Можно запрашивать на ввод как три значения сразу, так и выводить для каждой величины отдельное приглашение. 
+        Программа должна хранить время в структурной переменной типа time и выводить количество секунд в введенном времени, определяемое следующим образом:
+        long totalsecs = t1.hours*3600 + t1 minutes*60 + t1.seconds */
+
 }
 
 void VvodDannihSotrudnika(employee& rab)
