@@ -4,7 +4,8 @@ using namespace std;
 enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a', executive = 'e', researcher = 'r' };
 
 struct date { int day, month, year; };
-struct fraction { int chislitel, znamenatel; };
+struct time { int hours = 0, minutes = 0, seconds = 0; };
+struct delenieDrobey { int chislitel, znamenatel; };
 struct employee
 {
     int numberEmployee;
@@ -70,41 +71,41 @@ int main()
     case laborer:
     {
         worker = dolzhnost::laborer;
-        cout << "Полное название должности: laborer" << endl;
+        cout << "Полное название должности: laborer\n\n";
         break;
     }
     case secretary:
     {
         worker = dolzhnost::secretary;
-        cout << "Полное название должности: secretary" << endl;
+        cout << "Полное название должности: secretary\n\n";
         break;
     }
     case manager:
     {
         worker = dolzhnost::manager;
-        cout << "Полное название должности: manager" << endl;
+        cout << "Полное название должности: manager\n\n";
         break;
     }
     case accountant:
     {
         worker = dolzhnost::accountant;
-        cout << "Полное название должности: accountant" << endl;
+        cout << "Полное название должности: accountant\n\n";
         break;
     }
     case executive:
     {
         worker = dolzhnost::executive;
-        cout << "Полное название должности: executive" << endl;
+        cout << "Полное название должности: executive\n\n";
         break;
     }
     case researcher:
     {
         worker = dolzhnost::researcher;
-        cout << "Полное название должности: researcher" << endl;
+        cout << "Полное название должности: researcher\n\n";
         break;
     }
     default:
-        cout << "Ошибка ввода" << endl;
+        cout << "Ошибка ввода\n\n";
         break;
     }
 
@@ -112,7 +113,7 @@ int main()
     /*  Вернитесь к упражнению 9 комплекта заданий 1. В этом упражнении требуется написать программу, которая хранит значения двух дробей в виде числителя и знаменателя, 
         а затем складывает эти дроби согласно арифметическому правилу. Измените эту программу так, чтобы значения дробей хранились в структуре fraction, состоящей из двух полей типа int,
         предназначенных для хранения числителя и знаменателя. Все значения дробей должны храниться в переменных типа fraction.  */
-    fraction drob1, drob2;
+    delenieDrobey drob1, drob2;
     cout << "Введите первую дробь: " && cin >> drob1.chislitel >> symbol >> drob1.znamenatel;
     cout << "Введите вторую дробь: " && cin >> drob2.chislitel >> symbol >> drob2.znamenatel;
     cout << "Сумма дробей: " << drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel << symbol << drob1.znamenatel * drob2.znamenatel << endl << endl;
@@ -122,7 +123,28 @@ int main()
         Напишите программу, которая просит пользователя ввести время в формате часы, минуты, секунды. 
         Можно запрашивать на ввод как три значения сразу, так и выводить для каждой величины отдельное приглашение. 
         Программа должна хранить время в структурной переменной типа time и выводить количество секунд в введенном времени, определяемое следующим образом:
-        long totalsecs = t1.hours*3600 + t1 minutes*60 + t1.seconds */
+        long totalsecs = t1.hours*3600 + t1.minutes*60 + t1.seconds */
+    time setTime;
+    cout << "Желаете ввести время в полном формате?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
+    if (symbol == 'y')
+    {
+        cout << "Введите время в удобном для вас формате(например, 12 43 54)" << endl;
+        cin >> setTime.hours >> symbol >> setTime.minutes >> symbol >> setTime.seconds;
+    }
+    else
+    {
+        cout << "Обозначить количество часов?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
+        if (symbol == 'y')
+            cout << "Часов: " && cin >> setTime.hours;
+        cout << "Обозначить количество минут?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
+        if (symbol == 'y')
+            cout << "Минут: " && cin >> setTime.minutes;
+        cout << "Обозначить количество секунд?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
+        if (symbol == 'y')
+            cout << "Секунд: " && cin >> setTime.seconds;
+    }
+    cout << "Всего секунд: " << setTime.hours * 3600 + setTime.minutes * 60 + setTime.seconds << endl << endl;
+
 
 }
 
@@ -183,7 +205,7 @@ string VivodPolnRabotaName(employee& rab)
         return "researcher";
         break;
     default:
-        return "Ошибка вывода!!!";
+        return "Ошибка ввода!!!";
         break;
     }
 }
