@@ -6,7 +6,7 @@ enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a'
 struct date { int day, month, year; };
 struct time { int hours = 0, minutes = 0, seconds = 0; };
 struct sterling { int pounds, shillings, pence; };
-struct delenieDrobey { int chislitel, znamenatel; };
+struct drobi { int chislitel, znamenatel; };
 struct employee
 {
     int numberEmployee;
@@ -114,7 +114,7 @@ int main()
     /*  Вернитесь к упражнению 9 комплекта заданий 1. В этом упражнении требуется написать программу, которая хранит значения двух дробей в виде числителя и знаменателя, 
         а затем складывает эти дроби согласно арифметическому правилу. Измените эту программу так, чтобы значения дробей хранились в структуре fraction, состоящей из двух полей типа int,
         предназначенных для хранения числителя и знаменателя. Все значения дробей должны храниться в переменных типа fraction.  */
-    delenieDrobey drob1, drob2;
+    drobi drob1, drob2;
     cout << "Введите первую дробь: " && cin >> drob1.chislitel >> symbol >> drob1.znamenatel;
     cout << "Введите вторую дробь: " && cin >> drob2.chislitel >> symbol >> drob2.znamenatel;
     cout << "Сумма дробей: " << drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel << symbol << drob1.znamenatel * drob2.znamenatel << endl << endl;
@@ -158,7 +158,7 @@ int main()
     float drobnayaChast = (desSumma - starSumma.pounds) * 100; // десятичная дробная часть, СРАЗУ переводимая в пенсы(*100)
     starSumma.shillings = ((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
     starSumma.pence = (((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12) - starSumma.shillings) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
-    cout << "Эквивалентная сумма в старой форме записи: " << starSumma.pounds << "." << starSumma.shillings % 20 << "." << starSumma.pence << endl;
+    cout << "Эквивалентная сумма в старой форме записи: " << starSumma.pounds << "." << starSumma.shillings % 20 << "." << starSumma.pence << endl << endl;
 
     //11
     /*  Используя структуру time из упражнения 9, напишите программу, которая получает от пользователя два значения времени в формате 12:59:59, сохраняет их в переменных типа struct time,
@@ -172,9 +172,55 @@ int main()
     setTime1.hours = totalSec / 3600;
     setTime1.minutes = (totalSec % 3600) / 60;
     setTime1.seconds = (totalSec % 3600) % 60;
-    cout << "Сумма времени " << setTime1.hours << ':' << setTime1.minutes << ':' << setTime1.seconds;
+    cout << "Сумма времени " << setTime1.hours << ':' << setTime1.minutes << ':' << setTime1.seconds << endl << endl;
 
+    //12
+    /*  Переработайте программу-калькулятор для дробей, описанную в упражнении 12 комплекта упражнений 2 так,
+        чтобы каждая из дробей хранилась как значение переменной типа struct fraction, по аналогии с упражнением 8 этого комплекса упражнений.  */
+    char prodolzhenie = 'y';
+    do
+    {
+        drobi drob1, drob2;
+        char symbol, operachiya;
 
+        cout << "Введите первый операнд(дробь), операцию и второй операнд(дробь): ";
+        cin >> drob1.chislitel >> symbol >> drob1.znamenatel >> operachiya >> drob2.chislitel >> symbol >> drob2.znamenatel;
+
+        switch (operachiya)
+        {
+        case '+':
+        {
+            cout << "Сумма: " << (drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel) << '/' << (drob1.znamenatel * drob2.znamenatel) << endl;
+            cout << "Выполнить еще одну операцию (y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '-':
+        {
+            cout << "Разность: " << (drob1.chislitel * drob2.znamenatel - drob1.znamenatel * drob2.chislitel) << '/' << (drob1.znamenatel * drob2.znamenatel) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '/':
+        {
+            cout << "Частное: " << (drob1.chislitel * drob2.chislitel) << '/' << (drob1.znamenatel * drob2.znamenatel) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        case '*':
+        {
+            cout << "Произведение: " << (drob1.chislitel * drob2.chislitel) << '/' << (drob1.znamenatel * drob2.znamenatel) << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+        }
+
+        default:
+            cout << "Некорректный ввод" << endl;
+            break;
+        }
+    } while (prodolzhenie == 'y');
 }
 
 void VvodDannihSotrudnika(employee& rab)
