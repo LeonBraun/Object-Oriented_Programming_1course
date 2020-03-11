@@ -5,6 +5,7 @@ enum dolzhnost { laborer = 'l', secretary = 's', manager = 'm', accountant = 'a'
 
 struct date { int day, month, year; };
 struct time { int hours = 0, minutes = 0, seconds = 0; };
+struct sterling { int pounds, shillings, pence; };
 struct delenieDrobey { int chislitel, znamenatel; };
 struct employee
 {
@@ -144,6 +145,20 @@ int main()
             cout << "Секунд: " && cin >> setTime.seconds;
     }
     cout << "Всего секунд: " << setTime.hours * 3600 + setTime.minutes * 60 + setTime.seconds << endl << endl;
+
+    //10
+    /*  Создайте структуру с именем sterling, хранящую денежные суммы в старой английской системе, описанной в упражнениях 8 и 11 комплекса заданий 2.
+        Поля структуры могут быть названы pounds, shillings и pence и иметь тип int. Программа должна запрашивать у пользователя значение денежной суммы в новых десятичных фунтах
+        (значение должно храниться в переменной типа double), затем переводить эту сумму в старую систему, сохранять переведенное значение в переменной типа sterling.
+        А затем выводить на экран полученную сумму в фунтах, шиллингах и пенсах.  */
+    sterling starSumma;
+    double desSumma;
+    cout << "Денежная сумма в десятичных фунтах: " && cin >> desSumma;
+    starSumma.pounds = static_cast<int>(desSumma);
+    float drobnayaChast = (desSumma - starSumma.pounds) * 100; // десятичная дробная часть, СРАЗУ переводимая в пенсы(*100)
+    starSumma.shillings = ((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
+    starSumma.pence = (((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12) - starSumma.shillings) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
+    cout << "Эквивалентная сумма в старой форме записи: " << starSumma.pounds << "." << starSumma.shillings % 20 << "." << starSumma.pence << endl;
 
 
 }
