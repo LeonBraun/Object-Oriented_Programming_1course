@@ -125,26 +125,26 @@ int main()
         Можно запрашивать на ввод как три значения сразу, так и выводить для каждой величины отдельное приглашение. 
         Программа должна хранить время в структурной переменной типа time и выводить количество секунд в введенном времени, определяемое следующим образом:
         long totalsecs = t1.hours*3600 + t1.minutes*60 + t1.seconds */
-    time setTime;
+    time setTime1;
     cout << "Желаете ввести время в полном формате?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
     if (symbol == 'y')
     {
         cout << "Введите время в удобном для вас формате(например, 12 43 54)" << endl;
-        cin >> setTime.hours >> symbol >> setTime.minutes >> symbol >> setTime.seconds;
+        cin >> setTime1.hours >> symbol >> setTime1.minutes >> symbol >> setTime1.seconds;
     }
     else
     {
         cout << "Обозначить количество часов?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
         if (symbol == 'y')
-            cout << "Часов: " && cin >> setTime.hours;
+            cout << "Часов: " && cin >> setTime1.hours;
         cout << "Обозначить количество минут?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
         if (symbol == 'y')
-            cout << "Минут: " && cin >> setTime.minutes;
+            cout << "Минут: " && cin >> setTime1.minutes;
         cout << "Обозначить количество секунд?\n(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> symbol;
         if (symbol == 'y')
-            cout << "Секунд: " && cin >> setTime.seconds;
+            cout << "Секунд: " && cin >> setTime1.seconds;
     }
-    cout << "Всего секунд: " << setTime.hours * 3600 + setTime.minutes * 60 + setTime.seconds << endl << endl;
+    cout << "Всего секунд: " << setTime1.hours * 3600 + setTime1.minutes * 60 + setTime1.seconds << endl << endl;
 
     //10
     /*  Создайте структуру с именем sterling, хранящую денежные суммы в старой английской системе, описанной в упражнениях 8 и 11 комплекса заданий 2.
@@ -159,6 +159,20 @@ int main()
     starSumma.shillings = ((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
     starSumma.pence = (((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12) - starSumma.shillings) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
     cout << "Эквивалентная сумма в старой форме записи: " << starSumma.pounds << "." << starSumma.shillings % 20 << "." << starSumma.pence << endl;
+
+    //11
+    /*  Используя структуру time из упражнения 9, напишите программу, которая получает от пользователя два значения времени в формате 12:59:59, сохраняет их в переменных типа struct time,
+        затем переводит оба значения в секунды, складывает их, переводит сумму в исходный формат, сохраняет его в переменной типа time и выводит полученный результат на экран в формате 12:59:59.  */
+    time setTime2;
+    cout << "Введите первое значение времени в формате 12:59:59" << endl;
+    cin >> setTime1.hours >> symbol >> setTime1.minutes >> symbol >> setTime1.seconds;
+    cout << "Введите второе значение времени в формате 12:59:59" << endl;
+    cin >> setTime2.hours >> symbol >> setTime2.minutes >> symbol >> setTime2.seconds;
+    unsigned long int totalSec = setTime1.hours * 3600 + setTime1.minutes * 60 + setTime1.seconds + setTime2.hours * 3600 + setTime2.minutes * 60 + setTime2.seconds;
+    setTime1.hours = totalSec / 3600;
+    setTime1.minutes = (totalSec % 3600) / 60;
+    setTime1.seconds = (totalSec % 3600) % 60;
+    cout << "Сумма времени " << setTime1.hours << ':' << setTime1.minutes << ':' << setTime1.seconds;
 
 
 }
