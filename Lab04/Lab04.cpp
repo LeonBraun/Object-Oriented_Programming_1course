@@ -12,6 +12,7 @@ int power(int n, int p);
 long power(long n, int p);
 float power(float n, int p);
 void swap(int& a, int& b);
+void swap(time t1, time t2);
 
 int main()
 {
@@ -93,24 +94,17 @@ int main()
     swap(a, b);
     cout << "После замены:\ta = " << a << "\tb = " << b << endl << endl;
 
+    //9
+    /*  Переработайте программу из упражнения 8 так, чтобы функция swap() принимала в качестве аргументов значения типа time (см. упражнение 6).  */
+    cout << "Введите первое значение времени в формате 12:59:59" << endl;
+    cin >> setTime1.hours >> symbol >> setTime1.minutes >> symbol >> setTime1.seconds;
+    cout << "Введите второе значение времени в формате 12:59:59" << endl;
+    cin >> setTime2.hours >> symbol >> setTime2.minutes >> symbol >> setTime2.seconds;
+    swap(setTime1, setTime2);
+    cout << "Первое значение времени после функции swap " << setTime1.hours << ':' << setTime1.minutes << ':' << setTime1.seconds << endl;
+    cout << "Второе значение времени после функции swap " << setTime2.hours << ':' << setTime2.minutes << ':' << setTime2.seconds << endl << endl;
 
-}
 
-long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };
-
-long time_to_secs(time t1, time t2)
-{
-    long int totalSec = t1.hours * 3600 + t1.minutes * 60 + t1.seconds + t2.hours * 3600 + t2.minutes * 60 + t2.seconds;
-    return totalSec;
-}
-
-time secs_to_time(long totalSec)
-{
-    time stt;
-    stt.hours = totalSec / 3600;
-    stt.minutes = (totalSec % 3600) / 60;
-    stt.seconds = (totalSec % 3600) % 60;
-    return stt;
 }
 
 double power(double n, int p)
@@ -155,3 +149,32 @@ void swap(int& a, int& b)
     a = b;
     b = x;
 }
+void swap(time t1, time t2)
+{
+    int ht1 = t1.hours;
+    int mt1 = t1.minutes;
+    int st1 = t1.seconds;
+    t1.hours = t2.hours;
+    t1.minutes = t2.minutes;
+    t1.seconds = t2.seconds;
+    t2.hours = ht1;
+    t2.minutes = mt1;
+    t2.seconds = st1;
+}
+
+long time_to_secs(time t1, time t2)
+{
+    long int totalSec = t1.hours * 3600 + t1.minutes * 60 + t1.seconds + t2.hours * 3600 + t2.minutes * 60 + t2.seconds;
+    return totalSec;
+}
+
+time secs_to_time(long totalSec)
+{
+    time stt;
+    stt.hours = totalSec / 3600;
+    stt.minutes = (totalSec % 3600) / 60;
+    stt.seconds = (totalSec % 3600) % 60;
+    return stt;
+}
+
+long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };
