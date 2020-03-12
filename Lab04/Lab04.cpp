@@ -11,6 +11,7 @@ char power(char n, int p);
 int power(int n, int p);
 long power(long n, int p);
 float power(float n, int p);
+void swap(int& a, int& b);
 
 int main()
 {
@@ -82,6 +83,16 @@ int main()
         break;
     }
 
+    //8
+    /*  Напишите функцию с именем swap(), обменивающую значениями два своих аргумента типа int (обратите внимание, что изменяться должны значения переменных из вызывающей программы, а не локальных переменных функции).
+        Выберите способ передачи аргументов. Напишите вызывающую программу main(), использующую данную функцию. */
+    int a, b;
+    cout << "Введите числа, которые необходимо поменять местами:" << endl;
+    cout << "a = " && cin >> a;
+    cout << "b = " && cin >> b;
+    swap(a, b);
+    cout << "После замены:\ta = " << a << "\tb = " << b << endl << endl;
+
 
 }
 
@@ -136,4 +147,11 @@ float power(float n, int p)
     for (int j = 0; j < p; j++) 
         result *= n; 
     return result;
+}
+
+void swap(int& a, int& b)
+{
+    int x = a;
+    a = b;
+    b = x;
 }
