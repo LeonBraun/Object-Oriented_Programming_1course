@@ -4,6 +4,7 @@ using namespace std;
 int glob_kolvo_vizovov = 1;
 struct time { int hours = 0, minutes = 0, seconds = 0; };
 struct sterling { int pounds = 0, shillings = 0, pence = 0; };
+struct drobi { int chislitel, znamenatel; };
 
 long hms_to_secs(int hours, int min, int sec);
 long time_to_secs(time t1, time t2);
@@ -18,6 +19,10 @@ void swap(time t1, time t2);
 sterling vvodSummSterlng(sterling s);
 sterling slozheniyeSummSterling(sterling s1, sterling s2);
 void vivodSterlingSumm(sterling s);
+drobi slozhenie_drob(drobi d1, drobi d2);
+drobi razniza_drob(drobi d1, drobi d2);
+drobi deleniye_drob(drobi d1, drobi d2);
+drobi proizvedeniye_drob(drobi d1, drobi d2);
 
 int main()
 {
@@ -128,7 +133,49 @@ int main()
     sterling sumSterl = slozheniyeSummSterling(sum1, sum2);
     vivodSterlingSumm(sumSterl);
 
+    //12
+    /*  Модифицируйте калькулятор, созданный в упражнении 12 лабораторной работы 3 «Структуры», так, чтобы каждая арифметическая операция выполнялась с помощью функции.
+        Каждая из функций должна принимать два структурных аргумента типа fraction и возвращать значение того же типа.    */
+    prodolzhenie = 'y';
+    do
+    {
+        drobi drob1, drob2, itog;
+        char operachiya;
 
+        cout << "Введите первый операнд(дробь), операцию и второй операнд(дробь): ";
+        cin >> drob1.chislitel >> symbol >> drob1.znamenatel >> operachiya >> drob2.chislitel >> symbol >> drob2.znamenatel;
+
+        switch (operachiya)
+        {
+        case '+':
+            itog = slozhenie_drob(drob1, drob2);
+            cout << "Сумма: " << itog.chislitel << '/' << itog.znamenatel << endl;
+            cout << "Выполнить еще одну операцию (y/n)?" << endl && cin >> prodolzhenie;
+            break;
+
+        case '-':
+            itog = razniza_drob(drob1, drob2);
+            cout << "Разница: " << itog.chislitel << '/' << itog.znamenatel << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+
+        case '/':
+            itog = deleniye_drob(drob1, drob2);
+            cout << "Частное: " << itog.chislitel << '/' << itog.znamenatel << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+
+        case '*':
+            itog = proizvedeniye_drob(drob1, drob2);
+            cout << "Произведение: " << itog.chislitel << '/' << itog.znamenatel << endl;
+            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            break;
+
+        default:
+            cout << "Некорректный ввод" << endl;
+            break;
+        }
+    } while (prodolzhenie == 'y');
 }
 
 double power(double n, int p)
@@ -228,5 +275,34 @@ sterling slozheniyeSummSterling(sterling s1, sterling s2)
     return s1;
 }
 void vivodSterlingSumm(sterling s) { cout << "Сумма стерлингов: " << s.pounds << '.' << s.shillings << '.' << s.pence << endl << endl; };
+
+drobi slozhenie_drob(drobi drob1, drobi drob2)
+{
+    drobi sum;
+    sum.chislitel = drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel;
+    sum.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return sum;
+}
+drobi razniza_drob(drobi drob1, drobi drob2)
+{
+    drobi razn;
+    razn.chislitel = drob1.chislitel * drob2.znamenatel - drob1.znamenatel * drob2.chislitel;
+    razn.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return razn;
+}
+drobi deleniye_drob(drobi drob1, drobi drob2)
+{
+    drobi del;
+    del.chislitel = drob1.chislitel * drob2.chislitel;
+    del.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return del;
+};
+drobi proizvedeniye_drob(drobi drob1, drobi drob2)
+{
+    drobi proizv;
+    proizv.chislitel = drob1.chislitel * drob2.chislitel;
+    proizv.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return proizv;
+};
 
 long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };
