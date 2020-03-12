@@ -3,6 +3,7 @@ using namespace std;
 
 int glob_kolvo_vizovov = 1;
 struct time { int hours = 0, minutes = 0, seconds = 0; };
+struct sterling { int pounds = 0, shillings = 0, pence = 0; };
 
 long hms_to_secs(int hours, int min, int sec);
 long time_to_secs(time t1, time t2);
@@ -14,6 +15,9 @@ long power(long n, int p);
 float power(float n, int p);
 void swap(int& a, int& b);
 void swap(time t1, time t2);
+sterling vvodSummSterlng(sterling s);
+sterling slozheniyeSummSterling(sterling s1, sterling s2);
+void vivodSterlingSumm(sterling s);
 
 int main()
 {
@@ -111,6 +115,19 @@ int main()
         Какой из способов предпочтительней? Почему для решения задачи нельзя использовать обычную локальную переменную? */
     for (register int i = 0; i < 20; i++) { printRAZ(); };
 
+    //11
+    /*  Напишите программу, использующую структуру sterling, которая описана в упражнении 10 лабораторной работы 3 «Структуры».
+        Программа должна получать от пользователя значения двух денежных сумм, выраженных в фунтах, шиллингах и пенсах, складывать эти значения и выводить результат на экран в том же формате.
+        Необходимо разработать три функции. Первая из них должна получать от пользователя число фунтов, шиллингов и пенсов и возвращать соответствующее значение типа sterling.
+        Вторая функция должна принимать в качестве аргументов два значения типа sterling, складывать их и возвращать значение, также имеющее тип sterling.
+        Третья функция должна принимать аргумент типа sterling и выводить его значение на экран.    */
+    sterling sum1;
+    sum1 = vvodSummSterlng(sum1);
+    sterling sum2;
+    sum2 = vvodSummSterlng(sum2);
+    sterling sumSterl = slozheniyeSummSterling(sum1, sum2);
+    vivodSterlingSumm(sumSterl);
+
 
 }
 
@@ -194,5 +211,22 @@ void printRAZ()
         cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
     }
 }
+
+sterling vvodSummSterlng(sterling s)
+{
+    char symbol;
+    cout << "Введите сумму в старом формате (фунты.шилинги.пенсы): ";
+    cin >> s.pounds >> symbol >> s.shillings >> symbol >> s.pence;
+    return s;
+}
+sterling slozheniyeSummSterling(sterling s1, sterling s2)
+{
+    unsigned long int summaPens = s1.pounds * 20 * 12 + s1.shillings * 12 + s1.pence + s2.pounds * 20 * 12 + s2.shillings * 12 + s2.pence;
+    s1.pounds = summaPens / 240;
+    s1.shillings = (summaPens % 240) / 12;
+    s1.pence = (summaPens % 240) % 12;
+    return s1;
+}
+void vivodSterlingSumm(sterling s) { cout << "Сумма стерлингов: " << s.pounds << '.' << s.shillings << '.' << s.pence << endl << endl; };
 
 long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };

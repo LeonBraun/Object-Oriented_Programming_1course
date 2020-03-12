@@ -151,14 +151,14 @@ int main()
         Поля структуры могут быть названы pounds, shillings и pence и иметь тип int. Программа должна запрашивать у пользователя значение денежной суммы в новых десятичных фунтах
         (значение должно храниться в переменной типа double), затем переводить эту сумму в старую систему, сохранять переведенное значение в переменной типа sterling.
         А затем выводить на экран полученную сумму в фунтах, шиллингах и пенсах.  */
-    sterling starSumma;
+    sterling starayaSumma;
     double desSumma;
     cout << "Денежная сумма в десятичных фунтах: " && cin >> desSumma;
-    starSumma.pounds = static_cast<int>(desSumma);
-    float drobnayaChast = (desSumma - starSumma.pounds) * 100; // десятичная дробная часть, СРАЗУ переводимая в пенсы(*100)
-    starSumma.shillings = ((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
-    starSumma.pence = (((starSumma.pounds * 100 + drobnayaChast) * 2.4 / 12) - starSumma.shillings) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
-    cout << "Эквивалентная сумма в старой форме записи: " << starSumma.pounds << "." << starSumma.shillings % 20 << "." << starSumma.pence << endl << endl;
+    starayaSumma.pounds = static_cast<int>(desSumma);
+    float drobnayaChast = (desSumma - starayaSumma.pounds) * 100; // десятичная дробная часть, СРАЗУ переводимая в пенсы(*100)
+    starayaSumma.shillings = ((starayaSumma.pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
+    starayaSumma.pence = (((starayaSumma.pounds * 100 + drobnayaChast) * 2.4 / 12) - starayaSumma.shillings) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
+    cout << "Эквивалентная сумма в старой форме записи: " << starayaSumma.pounds << "." << starayaSumma.shillings % 20 << "." << starayaSumma.pence << endl << endl;
 
     //11
     /*  Используя структуру time из упражнения 9, напишите программу, которая получает от пользователя два значения времени в формате 12:59:59, сохраняет их в переменных типа struct time,
