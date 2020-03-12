@@ -6,6 +6,7 @@ struct time { int hours = 0, minutes = 0, seconds = 0; };
 struct sterling { int pounds = 0, shillings = 0, pence = 0; };
 struct drobi { int chislitel, znamenatel; };
 
+void printRAZ();
 long hms_to_secs(int hours, int min, int sec);
 long time_to_secs(time t1, time t2);
 time secs_to_time(long totalSec);
@@ -34,8 +35,8 @@ int main()
     while (prodolzhenie == 'y')
     {
         int hours, min, sec;
-        cout << "Введите время в удобном для вас формате(например, 12 34 58)\n" && cin >> hours >> symbol >> min >> symbol >> sec;
-        cout << "Всего секунд: " << hms_to_secs(hours, min, sec) << "\nПродолжить вычисления?(введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> prodolzhenie;
+        cout << "Введите время в удобном для вас формате (например, 12 34 58)\n" && cin >> hours >> symbol >> min >> symbol >> sec;
+        cout << "Всего секунд: " << hms_to_secs(hours, min, sec) << "\nПродолжить вычисления? (введите 'y' если согласны, или любой другой символ, дабы отказаться)\n" && cin >> prodolzhenie;
     }
 
     //6
@@ -119,6 +120,7 @@ int main()
         Попробуйте реализовать данную функцию двумя различными способами: с использованием глобальной переменной и статической локальной переменной для хранения числа вызовов функции.
         Какой из способов предпочтительней? Почему для решения задачи нельзя использовать обычную локальную переменную? */
     for (register int i = 0; i < 20; i++) { printRAZ(); };
+    cout << endl;
 
     //11
     /*  Напишите программу, использующую структуру sterling, которая описана в упражнении 10 лабораторной работы 3 «Структуры».
@@ -150,25 +152,25 @@ int main()
         case '+':
             itog = slozhenie_drob(drob1, drob2);
             cout << "Сумма: " << itog.chislitel << '/' << itog.znamenatel << endl;
-            cout << "Выполнить еще одну операцию (y/n)?" << endl && cin >> prodolzhenie;
+            cout << "Выполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться)" << endl && cin >> prodolzhenie;
             break;
 
         case '-':
             itog = razniza_drob(drob1, drob2);
             cout << "Разница: " << itog.chislitel << '/' << itog.znamenatel << endl;
-            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            cout << "Выполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться)" << endl && cin >> prodolzhenie;
             break;
 
         case '/':
             itog = deleniye_drob(drob1, drob2);
             cout << "Частное: " << itog.chislitel << '/' << itog.znamenatel << endl;
-            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            cout << "Выполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться)" << endl && cin >> prodolzhenie;
             break;
 
         case '*':
             itog = proizvedeniye_drob(drob1, drob2);
             cout << "Произведение: " << itog.chislitel << '/' << itog.znamenatel << endl;
-            cout << "Выполнить еще одну операцию(y/n)?" << endl && cin >> prodolzhenie;
+            cout << "Выполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться)" << endl && cin >> prodolzhenie;
             break;
 
         default:
