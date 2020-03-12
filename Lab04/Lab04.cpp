@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 using namespace std;
 
+int glob_kolvo_vizovov = 1;
 struct time { int hours = 0, minutes = 0, seconds = 0; };
 
 long hms_to_secs(int hours, int min, int sec);
@@ -104,6 +105,12 @@ int main()
     cout << "Первое значение времени после функции swap " << setTime1.hours << ':' << setTime1.minutes << ':' << setTime1.seconds << endl;
     cout << "Второе значение времени после функции swap " << setTime2.hours << ':' << setTime2.minutes << ':' << setTime2.seconds << endl << endl;
 
+    //10
+    /*  Напишите функцию, которая при каждом вызове будет выводить на экран количество раз, которое она вызывалась ранее. Напишите программу, которая будет вызывать данную функцию не менее 10 раз.
+        Попробуйте реализовать данную функцию двумя различными способами: с использованием глобальной переменной и статической локальной переменной для хранения числа вызовов функции.
+        Какой из способов предпочтительней? Почему для решения задачи нельзя использовать обычную локальную переменную? */
+    for (register int i = 0; i < 20; i++) { printRAZ(); };
+
 
 }
 
@@ -175,6 +182,17 @@ time secs_to_time(long totalSec)
     stt.minutes = (totalSec % 3600) / 60;
     stt.seconds = (totalSec % 3600) % 60;
     return stt;
+}
+
+void printRAZ()
+{
+    if (glob_kolvo_vizovov < 10)
+        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
+    else
+    {
+        static int kolvo_vizovov = glob_kolvo_vizovov;
+        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
+    }
 }
 
 long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };
