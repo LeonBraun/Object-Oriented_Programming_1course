@@ -19,7 +19,7 @@ class rabotnik
     int numberRabotnika;
     float zarplata;
     date dayPrinyatiya;
-    dolzhnost worker;
+    string strWorker;
 
 public:
     void SetRabotnik()
@@ -31,26 +31,26 @@ public:
         cout << "Личный номер и зарплата: " && cin >> numberRabotnika >> zarplata;
         cout << "Дата принятия на работу ";
         dayPrinyatiya.SetDate();
-        cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
+        cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva && cout << endl;
         switch (bukva)
         {
         case laborer:
-            worker = dolzhnost::laborer;
+            strWorker = "laborer";
             break;
         case secretary:
-            worker = dolzhnost::secretary;
+            strWorker = "secretary";
             break;
         case manager:
-            worker = dolzhnost::manager;
+            strWorker = "manager";
             break;
         case accountant:
-            worker = dolzhnost::accountant;
+            strWorker = "accountant";
             break;
         case executive:
-            worker = dolzhnost::executive;
+            strWorker = "executive";
             break;
         case researcher:
-            worker = dolzhnost::researcher;
+            strWorker = "researcher";
             break;
         default:
             cout << "Ошибка ввода\n\n";
@@ -58,7 +58,7 @@ public:
         }
     };
 
-    void vivodRabotnika() { cout << "Сотрудник №" << numberRabotnika << ", занимает должность " << worker << " и получает " << zarplata << ", принят на работу "; dayPrinyatiya.GetDate(); cout << endl; }
+    void GetRabotnik() { cout << "Сотрудник №" << numberRabotnika << ", занимает должность " << strWorker << " и получает " << zarplata << ", принят на работу "; dayPrinyatiya.GetDate(); cout << endl; }
 };
 
 int main()
@@ -79,6 +79,13 @@ int main()
     rabotnik r1, r2, r3;
     r1.SetRabotnik(); r2.SetRabotnik();  r3.SetRabotnik();
     cout << endl;
-    r1.vivodRabotnika(); r2.vivodRabotnika(); r3.vivodRabotnika();
+    r1.GetRabotnik(); r2.GetRabotnik(); r3.GetRabotnik();
+    
+    //7
+    /*  В морской навигации координаты точки измеряются в градусах и минутах широты и долготы. Например, координаты бухты Панити на о.
+        Таити равны 149 градусов 34.8 минут восточной долготы и 17 градусов 31.5 минут южной широты. Это записывается как 149°34.8' W, 17°31.5' S. 
+        Один градус равен 60 минутам (устаревшая система также делила одну минуту на 60 секунд, но сейчас минуту делят на обычные десятичные доли). 
+        Долгота измеряется величиной от 0 до 180 градусов восточнее или западнее Гринвича.
+        Широта принимает значения от 0 до 90 градусов севернее или южнее экватора.  */
 
 }
