@@ -95,6 +95,13 @@ public:
     }
     void GetPorNumber() { cout << "Мой номер " << number << endl; }
 };
+class drobi
+{
+    int chislitel, znamenatel;
+public:
+    void SetDrob() { char symbol;    cout << "Введите дробь: " && cin >> chislitel >> symbol >> znamenatel; }
+    void SummaDrob(drobi drob1, drobi drob2) { cout << drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel << '/' << drob1.znamenatel * drob2.znamenatel << endl; }
+};
 
 int main()
 {
@@ -150,4 +157,19 @@ int main()
         Создайте функцию main(), в которой будут созданы три объекта, и каждый объект выведет на экран свой порядковый номер, например: Мой порядковый номер: 2 и т. п. */
     numberObject a, b, c;
     a.GetPorNumber(); b.GetPorNumber(); c.GetPorNumber();
+
+    //9
+    /*  На основе структуры fraction из упражнения 8 главы 3 создайте класс fraction. Данные класса должны быть представлены двумя полями: числителем и знаменателем.
+        Методы класса должны получать от пользователя значения числителя и знаменателя дроби в форме 3/5 и выводить значение дроби в этом же формате.
+        Кроме того, должен быть разработан метод, складывающий значения двух дробей. Напишите функцию main(), которая циклически запрашивает у пользователя ввод пары дробей,
+        затем складывает их и выводит результат на экран. После каждой такой операции программа должна спрашивать пользователя, следует ли продолжать цикл. */
+    prodolzhenie = 'y';
+    while (prodolzhenie == 'y')
+    {
+        drobi d1, d2;
+        d1.SetDrob();   d2.SetDrob();
+        d1.SummaDrob(d1, d2);
+        cout << "Продолжить ввод? (введите символ 'y', если согласны или любой другой, дабы отказаться) " && cin >> prodolzhenie;
+    }
+
 }
