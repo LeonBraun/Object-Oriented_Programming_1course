@@ -57,31 +57,6 @@ public:
 
     void GetRabotnik() { cout << "Сотрудник №" << numberRabotnika << ", занимает должность " << strWorker << " и получает " << zarplata << ", принят на работу "; dayPrinyatiya.GetDate(); cout << endl; }
 };
-class angle
-{
-    int gradus;
-    float min;
-    char napravlenie;
-
-public:
-    angle(int g, float m, char n)
-    {
-        gradus = g;
-        min = m;
-        napravlenie = n;
-    }
-
-    void SetKoord()
-    {
-        cout << "\nВведите координаты (для обозначения сторон света используйте символы: север - 'N', юг - 'S', запад - 'W', восток - 'E')" << endl;
-        cout << "Градусов: " && cin >> gradus;
-        cout << "Минут: " && cin >> min;
-        do
-            cout << "Сторона света: " && cin >> napravlenie;
-        while (napravlenie != 'N' && napravlenie != 'S' && napravlenie != 'W' && napravlenie != 'E');
-    }
-    void GetKoord() { cout << "Точка имеет координаты: " << gradus << char(176) << min << "' " << napravlenie << endl; }
-};
 class numberObject
 {
     static int kolvoObj;
@@ -178,6 +153,65 @@ public:
         cout << "Ответ: " << chislitel << '/' << znamenatel << endl;
     }
 };
+class angle7
+{
+    int gradus;
+    float min;
+    char napravlenie;
+
+public:
+    angle7(int g, float m, char n)
+    {
+        gradus = g;
+        min = m;
+        napravlenie = n;
+    }
+
+    void SetKoord()
+    {
+        cout << "\nВведите координаты (для обозначения сторон света используйте символы: север - 'N', юг - 'S', запад - 'W', восток - 'E')" << endl;
+        cout << "Градусов: " && cin >> gradus;
+        cout << "Минут: " && cin >> min;
+        do
+            cout << "Сторона света: " && cin >> napravlenie;
+        while (napravlenie != 'N' && napravlenie != 'S' && napravlenie != 'W' && napravlenie != 'E');
+    }
+    void GetKoord() { cout << "Точка имеет координаты: " << gradus << char(176) << min << "' " << napravlenie << endl; }
+};
+class angle10
+{
+    int gradusShirota, gradusDolgota;
+    float minShirota, minDolgota;
+    char napravlenieShirota, napravlenieDolgota;
+
+public:
+    angle10() {}
+    void SetKoord()
+    {
+        cout << "Введите координаты корабля: градусы, минуты и направление (в формате 145 31.6 N 102 67.3 S)\n";
+        cin >> gradusShirota >> minShirota >> napravlenieShirota >> gradusDolgota >> minDolgota >> napravlenieDolgota;
+
+        while (napravlenieDolgota != 'N' && napravlenieDolgota != 'S' && napravlenieDolgota != 'W' && napravlenieDolgota != 'E')
+            cout << "Введите корректное значение направления для долготы (север - 'N', юг - 'S', запад - 'W', восток - 'E'): " && cin >> napravlenieDolgota;
+        while (napravlenieShirota != 'N' && napravlenieShirota != 'S' && napravlenieShirota != 'W' && napravlenieShirota != 'E')
+            cout << "Введите корректное значение направления для широты (север - 'N', юг - 'S', запад - 'W', восток - 'E'): " && cin >> napravlenieShirota;
+    }
+    void GetKoord(int numberShip) {
+        cout << "Координаты корабля №" << numberShip << ": " <<
+            gradusShirota << char(176) << minShirota << "'" << napravlenieShirota << ' ' <<
+            gradusDolgota << char(176) << minDolgota << "'" << napravlenieDolgota << endl;
+    };
+};
+class ship
+{
+    int porNumber;
+    static int kolvoShips;
+    angle10 koords;
+public:
+    ship() { static int kolvoShips = 1; porNumber = kolvoShips++; }
+    void SetShirotaDolgota() { koords.SetKoord(); }
+    void GetShip() { koords.GetKoord(porNumber); }
+};
 
 int main()
 {
@@ -214,7 +248,7 @@ int main()
         и метод, выводящий на экран значение этой координаты, например 179°59.9' Е. Кроме того, напишите конструктор, принимающий три аргумента.
         Напишите функцию main, которая сначала создает переменную с помощью трехаргументного конструктора и выводит ее значение на экран,
         а затем циклически запрашивает пользователя ввести значение координаты и отображает введенное значение на экране. Для вывода символа градусов (°) можно воспользоваться символьной константой '\xF8'.  */
-    angle koordObj(144, 31.5, 'N');
+    angle7 koordObj(144, 31.5, 'N');
     koordObj.GetKoord();
     char prodolzhenie = 'y';
     while (prodolzhenie == 'y')
@@ -223,6 +257,7 @@ int main()
         koordObj.GetKoord();
         cout << "Продолжить ввод? (введите символ 'y', если согласны или любой другой, дабы отказаться) " && cin >> prodolzhenie;
     }
+    cout << endl;
 
     //8
     /*  Создайте класс, одно из полей которого хранит «порядковый номер» объекта, то есть для первого созданного объекта значение этого поля равно 1, для второго созданного объекта значение равно 2 и т. д.
@@ -231,8 +266,9 @@ int main()
         Каждый раз при создании нового объекта конструктор может получить значение этого поля и в соответствии с ним назначить объекту индивидуальный порядковый номер.
         В класс следует включить метод, который будет выводить на экран порядковый номер объекта.
         Создайте функцию main(), в которой будут созданы три объекта, и каждый объект выведет на экран свой порядковый номер, например: Мой порядковый номер: 2 и т. п. */
-    numberObject a, b, c;
-    a.GetPorNumber(); b.GetPorNumber(); c.GetPorNumber();
+    numberObject a1, b1, c1;
+    a1.GetPorNumber(); b1.GetPorNumber(); c1.GetPorNumber();
+    cout << endl;
 
     //9
     /*  На основе структуры fraction из упражнения 8 главы 3 создайте класс fraction. Данные класса должны быть представлены двумя полями: числителем и знаменателем.
@@ -247,8 +283,17 @@ int main()
         d1.SummaDrob(d1, d2);
         cout << "Продолжить ввод? (введите символ 'y', если согласны или любой другой, дабы отказаться) " && cin >> prodolzhenie;
     }
+    cout << endl;
 
-
+    //10
+    /*	Создайте класс с именем ship, который будет содержать данные об учетном номере корабля и координатах его расположения.
+        Для задания номера корабля следует использовать механизм, аналогичный описанному в упражнении 8. Для хранения координат используйте два поля типа angle (см. упражнение 7).
+        Разработайте метод, который будет сохранять в объекте данные о корабле, вводимые пользователем, и метод, выводящий данные о корабле на экран.
+        Напишите функцию main, создающую три объекта класса ship, затем запрашивающую ввод пользователем информации о каждом из кораблей и выводящую на экран всю полученную информацию.	*/
+    ship a2, b2, c2;
+    a2.SetShirotaDolgota(); b2.SetShirotaDolgota(); c2.SetShirotaDolgota();
+    a2.GetShip(); b2.GetShip(); c2.GetShip();
+    cout << endl;
 
     //11
     /*  Модифицируйте калькулятор, созданный в упражнении 12 главы 4 так, чтобы вместо структуры fraction использовался одноименный класс.
@@ -265,4 +310,6 @@ int main()
         operations_drobs.Calculator(d1, d2);
         cout << "\nВыполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться) " && cin >> prodolzhenie;
     } while (prodolzhenie == 'y');
+    cout << endl;
+
 }
