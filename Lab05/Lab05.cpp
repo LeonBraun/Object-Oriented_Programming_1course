@@ -102,6 +102,82 @@ public:
     void SetDrob() { char symbol;    cout << "Введите дробь: " && cin >> chislitel >> symbol >> znamenatel; }
     void SummaDrob(drobi drob1, drobi drob2) { cout << drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel << '/' << drob1.znamenatel * drob2.znamenatel << endl; }
 };
+class fraction
+{
+    int chislitel, znamenatel;
+    char deistvie;
+public:
+    fraction()
+    {
+        chislitel = 1;
+        znamenatel = 1;
+        deistvie = ' ';
+    }
+    void SetDrob(fraction& d1, fraction& d2)
+    {
+        char symbol;
+        cout << "Введите первый операнд(дробь), операцию и второй операнд(дробь): " && cin >> d1.chislitel >> symbol >> d1.znamenatel >> deistvie >> d2.chislitel >> symbol >> d2.znamenatel;
+    }
+    void sokrashDrobi(int& chis, int& znam) //Сокращение дроби
+    {
+        long polozhChis, polozhZnam, vremValue, gcd;
+        polozhChis = labs(chis); // Берем модули числителя и знаменателя 
+        polozhZnam = labs(znam); // Нужен cmath
+        if (polozhZnam == 0)
+        { // Проверка знаменателя
+            cout << "Недопустимый знаменатель";
+            exit(1);
+        }
+        else if (polozhChis == 0)
+        {
+            chis = 0;
+            znam = 1;
+            return;
+        }
+        // Нахождение наибольшего общего делителя
+        while (polozhChis != 0)
+        {
+            if (polozhChis < polozhZnam)
+            { // Если числитель больше знаменателя, меняем их местами.
+                vremValue = polozhChis;
+                polozhChis = polozhZnam;
+                polozhZnam = vremValue;
+            }
+            polozhChis = polozhChis - polozhZnam;
+        }
+        gcd = polozhZnam;// Делим числитель и знаменатель на НОД.
+        chis = chis / gcd;
+        znam = znam / gcd;
+    }
+    void Calculator(fraction drob1, fraction drob2)
+    {
+        switch (deistvie)
+        {
+        case'+':
+            chislitel = drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel;
+            znamenatel = drob1.znamenatel * drob2.znamenatel;
+            break;
+        case'-':
+            chislitel = drob1.chislitel * drob2.znamenatel - drob1.znamenatel * drob2.chislitel;
+            znamenatel = drob1.znamenatel * drob2.znamenatel;
+            break;
+        case'/':
+            chislitel = drob1.chislitel * drob2.chislitel;
+            znamenatel = drob1.znamenatel * drob2.znamenatel;
+            break;
+        case'*':
+            chislitel = drob1.chislitel * drob2.chislitel;
+            znamenatel = drob1.znamenatel * drob2.znamenatel;
+            break;
+
+        default:
+            cout << "Ошибка ввода!!!" << endl;
+            break;
+        }
+        sokrashDrobi(chislitel, znamenatel);
+        cout << "Ответ: " << chislitel << '/' << znamenatel << endl;
+    }
+};
 
 int main()
 {
@@ -172,4 +248,21 @@ int main()
         cout << "Продолжить ввод? (введите символ 'y', если согласны или любой другой, дабы отказаться) " && cin >> prodolzhenie;
     }
 
+
+
+    //11
+    /*  Модифицируйте калькулятор, созданный в упражнении 12 главы 4 так, чтобы вместо структуры fraction использовался одноименный класс.
+        Класс должен содержать методы для ввода и вывода данных объектов, а также для выполнения арифметических операций. Кроме того, необходимо включить в состав класса функцию, приводящую дробь к несократимому виду.
+        Функция должна находить наибольший общий делитель числителя и знаменателя и делить числитель и знаменатель на это значение. Код функции, названной lowterms(), приведен выше.
+
+        Можно вызывать данную функцию в конце каждого метода, выполняющего арифметическую операцию, либо непосредственно перед выводом на экран результата.
+        Кроме перечисленных методов, вы можете включить в класс конструктор с двумя аргументами, что также будет полезно	*/
+    prodolzhenie = 'y';
+    do
+    {
+        fraction d1, d2, operations_drobs;
+        operations_drobs.SetDrob(d1, d2);
+        operations_drobs.Calculator(d1, d2);
+        cout << "\nВыполнить еще одну операцию? (введите 'y' если согласны, или любой другой символ, дабы отказаться) " && cin >> prodolzhenie;
+    } while (prodolzhenie == 'y');
 }
