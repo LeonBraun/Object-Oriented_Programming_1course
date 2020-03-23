@@ -7,7 +7,7 @@ fraction raznicha(const fraction& a, const fraction& b) { return fraction(a.getc
 fraction proizv(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getchisl(), a.getznam() * b.getznam()); }
 fraction delenie(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getznam(), a.getznam() * b.getchisl()); };
 
-int sok(int a, int b)
+int NOD(int a, int b)
 {
     if (a == 0 || b == 0) { return 1; }
     if (a < 0) { a = -a; }
@@ -27,7 +27,7 @@ fraction reduce(const fraction& f)
         chisl = -chisl;
         znam = -znam;
     }
-    int gcd = sok(chisl, znam);
+    int gcd = NOD(chisl, znam);
     return fraction(chisl / gcd, znam / gcd);
 }
 fraction input() { return fraction(); }
