@@ -6,24 +6,135 @@ struct time { int hours = 0, minutes = 0, seconds = 0; };
 struct sterling { int pounds = 0, shillings = 0, pence = 0; };
 struct drobi { int chislitel, znamenatel; };
 
-void printRAZ();
-long hms_to_secs(int hours, int min, int sec);
-long time_to_secs(time t1, time t2);
-time secs_to_time(long totalSec);
 double power(double n, int p = 2); //по умолчанию любое число возводим во вторую степень
-char power(char n, int p);
-int power(int n, int p);
-long power(long n, int p);
-float power(float n, int p);
-void swap(int& a, int& b);
-void swap(time t1, time t2);
-sterling vvodSummSterlng(sterling s);
-sterling slozheniyeSummSterling(sterling s1, sterling s2);
-void vivodSterlingSumm(sterling s);
-drobi slozhenie_drob(drobi d1, drobi d2);
-drobi razniza_drob(drobi d1, drobi d2);
-drobi deleniye_drob(drobi d1, drobi d2);
-drobi proizvedeniye_drob(drobi d1, drobi d2);
+double power(double n, int p)
+{
+    double result = 1; //начать с 1
+    for (int j = 0; j < p; j++) //умножить на n
+        result *= n; //p раз
+    return result;
+}
+char power(char n, int p)
+{
+    char result = 1;
+    for (int j = 0; j < p; j++)
+        result *= n;
+    return result;
+}
+int power(int n, int p)
+{
+    int result = 1;
+    for (int j = 0; j < p; j++)
+        result *= n;
+    return result;
+}
+long power(long n, int p)
+{
+    long result = 1;
+    for (int j = 0; j < p; j++)
+        result *= n;
+    return result;
+}
+float power(float n, int p)
+{
+    float result = 1;
+    for (int j = 0; j < p; j++)
+        result *= n;
+    return result;
+}
+
+void swap(int& a, int& b)
+{
+    int x = a;
+    a = b;
+    b = x;
+}
+void swap(time t1, time t2)
+{
+    int ht1 = t1.hours;
+    int mt1 = t1.minutes;
+    int st1 = t1.seconds;
+    t1.hours = t2.hours;
+    t1.minutes = t2.minutes;
+    t1.seconds = t2.seconds;
+    t2.hours = ht1;
+    t2.minutes = mt1;
+    t2.seconds = st1;
+}
+
+long time_to_secs(time t1, time t2)
+{
+    long int totalSec = t1.hours * 3600 + t1.minutes * 60 + t1.seconds + t2.hours * 3600 + t2.minutes * 60 + t2.seconds;
+    return totalSec;
+}
+
+time secs_to_time(long totalSec)
+{
+    time stt;
+    stt.hours = totalSec / 3600;
+    stt.minutes = (totalSec % 3600) / 60;
+    stt.seconds = (totalSec % 3600) % 60;
+    return stt;
+}
+
+void printRAZ()
+{
+    if (glob_kolvo_vizovov < 10)
+        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
+    else
+    {
+        static int kolvo_vizovov = glob_kolvo_vizovov;
+        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
+    }
+}
+
+sterling vvodSummSterlng(sterling s)
+{
+    char symbol;
+    cout << "Введите сумму в старом формате (фунты.шилинги.пенсы): ";
+    cin >> s.pounds >> symbol >> s.shillings >> symbol >> s.pence;
+    return s;
+}
+sterling slozheniyeSummSterling(sterling s1, sterling s2)
+{
+    unsigned long int summaPens = s1.pounds * 20 * 12 + s1.shillings * 12 + s1.pence + s2.pounds * 20 * 12 + s2.shillings * 12 + s2.pence;
+    s1.pounds = summaPens / 240;
+    s1.shillings = (summaPens % 240) / 12;
+    s1.pence = (summaPens % 240) % 12;
+    return s1;
+}
+void vivodSterlingSumm(sterling s) { cout << "Сумма стерлингов: " << s.pounds << '.' << s.shillings << '.' << s.pence << endl << endl; }
+
+drobi slozhenie_drob(drobi drob1, drobi drob2)
+{
+    drobi sum;
+    sum.chislitel = drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel;
+    sum.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return sum;
+}
+drobi razniza_drob(drobi drob1, drobi drob2)
+{
+    drobi razn;
+    razn.chislitel = drob1.chislitel * drob2.znamenatel - drob1.znamenatel * drob2.chislitel;
+    razn.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return razn;
+}
+drobi deleniye_drob(drobi drob1, drobi drob2)
+{
+    drobi del;
+    del.chislitel = drob1.chislitel * drob2.chislitel;
+    del.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return del;
+}
+drobi proizvedeniye_drob(drobi drob1, drobi drob2)
+{
+    drobi proizv;
+    proizv.chislitel = drob1.chislitel * drob2.chislitel;
+    proizv.znamenatel = drob1.znamenatel * drob2.znamenatel;
+    return proizv;
+}
+
+long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; }
 
 int main()
 {
@@ -179,132 +290,3 @@ int main()
         }
     } while (prodolzhenie == 'y');
 }
-
-double power(double n, int p)
-{
-    double result = 1; //начать с 1
-    for (int j = 0; j < p; j++) //умножить на n
-        result *= n; //p раз
-    return result;
-}
-char power(char n, int p)
-{
-    char result = 1; 
-    for (int j = 0; j < p; j++) 
-        result *= n; 
-    return result;
-}
-int power(int n, int p)
-{
-    int result = 1;
-    for (int j = 0; j < p; j++) 
-        result *= n;
-    return result;
-}
-long power(long n, int p)
-{
-    long result = 1; 
-    for (int j = 0; j < p; j++) 
-        result *= n; 
-    return result;
-}
-float power(float n, int p)
-{
-    float result = 1; 
-    for (int j = 0; j < p; j++) 
-        result *= n; 
-    return result;
-}
-
-void swap(int& a, int& b)
-{
-    int x = a;
-    a = b;
-    b = x;
-}
-void swap(time t1, time t2)
-{
-    int ht1 = t1.hours;
-    int mt1 = t1.minutes;
-    int st1 = t1.seconds;
-    t1.hours = t2.hours;
-    t1.minutes = t2.minutes;
-    t1.seconds = t2.seconds;
-    t2.hours = ht1;
-    t2.minutes = mt1;
-    t2.seconds = st1;
-}
-
-long time_to_secs(time t1, time t2)
-{
-    long int totalSec = t1.hours * 3600 + t1.minutes * 60 + t1.seconds + t2.hours * 3600 + t2.minutes * 60 + t2.seconds;
-    return totalSec;
-}
-
-time secs_to_time(long totalSec)
-{
-    time stt;
-    stt.hours = totalSec / 3600;
-    stt.minutes = (totalSec % 3600) / 60;
-    stt.seconds = (totalSec % 3600) % 60;
-    return stt;
-}
-
-void printRAZ()
-{
-    if (glob_kolvo_vizovov < 10)
-        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
-    else
-    {
-        static int kolvo_vizovov = glob_kolvo_vizovov;
-        cout << "Функция printRAZ была вызвана: " << glob_kolvo_vizovov++ << "раз(а)" << endl;
-    }
-}
-
-sterling vvodSummSterlng(sterling s)
-{
-    char symbol;
-    cout << "Введите сумму в старом формате (фунты.шилинги.пенсы): ";
-    cin >> s.pounds >> symbol >> s.shillings >> symbol >> s.pence;
-    return s;
-}
-sterling slozheniyeSummSterling(sterling s1, sterling s2)
-{
-    unsigned long int summaPens = s1.pounds * 20 * 12 + s1.shillings * 12 + s1.pence + s2.pounds * 20 * 12 + s2.shillings * 12 + s2.pence;
-    s1.pounds = summaPens / 240;
-    s1.shillings = (summaPens % 240) / 12;
-    s1.pence = (summaPens % 240) % 12;
-    return s1;
-}
-void vivodSterlingSumm(sterling s) { cout << "Сумма стерлингов: " << s.pounds << '.' << s.shillings << '.' << s.pence << endl << endl; };
-
-drobi slozhenie_drob(drobi drob1, drobi drob2)
-{
-    drobi sum;
-    sum.chislitel = drob1.chislitel * drob2.znamenatel + drob1.znamenatel * drob2.chislitel;
-    sum.znamenatel = drob1.znamenatel * drob2.znamenatel;
-    return sum;
-}
-drobi razniza_drob(drobi drob1, drobi drob2)
-{
-    drobi razn;
-    razn.chislitel = drob1.chislitel * drob2.znamenatel - drob1.znamenatel * drob2.chislitel;
-    razn.znamenatel = drob1.znamenatel * drob2.znamenatel;
-    return razn;
-}
-drobi deleniye_drob(drobi drob1, drobi drob2)
-{
-    drobi del;
-    del.chislitel = drob1.chislitel * drob2.chislitel;
-    del.znamenatel = drob1.znamenatel * drob2.znamenatel;
-    return del;
-};
-drobi proizvedeniye_drob(drobi drob1, drobi drob2)
-{
-    drobi proizv;
-    proizv.chislitel = drob1.chislitel * drob2.chislitel;
-    proizv.znamenatel = drob1.znamenatel * drob2.znamenatel;
-    return proizv;
-};
-
-long hms_to_secs(int hours, int min, int sec) { return hours * 3600 + min * 60 + sec; };

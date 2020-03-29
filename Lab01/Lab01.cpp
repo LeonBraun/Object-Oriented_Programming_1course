@@ -100,7 +100,7 @@ int main()
     float drobnayaChast = (allSum - pounds) * 100; // десятичная дробная часть, СРАЗУ переводимая в пенсы(*100)
     int shilingBezDrobnoyChast = ((pounds * 100 + drobnayaChast) * 2.4 / 12); // целое число шилингов
     float pens = (((pounds * 100 + drobnayaChast) * 2.4 / 12) - shilingBezDrobnoyChast) * 10; // остаток от разницы: шилинги (с дробной частью) - int шилинги, умножаем на * 10 = кол. пенс
-    cout << "Эквивалентная сумма в старой форме записи: " << pounds << "." << shilingBezDrobnoyChast % 20 << "." << pens << endl;
+    cout << "Эквивалентная сумма в старой форме записи: " << pounds << "." << shilingBezDrobnoyChast % 20 << "." << pens << endl << endl;
 
     //#11
     /*  По умолчанию форматирование вывода производится по правому краю поля. Можно изменить форматирование текста на левостороннее путем использования манипулятора setiosflags(ios::left)

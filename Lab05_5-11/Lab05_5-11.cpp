@@ -188,13 +188,13 @@ public:
     angle10() {}
     void SetKoord()
     {
-        cout << "Введите координаты корабля: градусы, минуты и направление (в формате 145 31.6 N 102 67.3 S)\n";
+        cout << "Введите координаты корабля: градусы, минуты и направление (в формате 145 31.6 N 102 67.3 W)\n";
         cin >> gradusShirota >> minShirota >> napravlenieShirota >> gradusDolgota >> minDolgota >> napravlenieDolgota;
 
-        while (napravlenieDolgota != 'N' && napravlenieDolgota != 'S' && napravlenieDolgota != 'W' && napravlenieDolgota != 'E')
-            cout << "Введите корректное значение направления для долготы (север - 'N', юг - 'S', запад - 'W', восток - 'E'): " && cin >> napravlenieDolgota;
-        while (napravlenieShirota != 'N' && napravlenieShirota != 'S' && napravlenieShirota != 'W' && napravlenieShirota != 'E')
-            cout << "Введите корректное значение направления для широты (север - 'N', юг - 'S', запад - 'W', восток - 'E'): " && cin >> napravlenieShirota;
+        while (napravlenieDolgota != 'W' && napravlenieDolgota != 'E')
+            cout << "Введите корректное значение направления для долготы (запад - 'W', восток - 'E'): " && cin >> napravlenieDolgota;
+        while (napravlenieShirota != 'N' && napravlenieShirota != 'S')
+            cout << "Введите корректное значение направления для широты (север - 'N', юг - 'S'): " && cin >> napravlenieShirota;
     }
     void GetKoord(int numberShip) {
         cout << "Координаты корабля №" << numberShip << ": " <<

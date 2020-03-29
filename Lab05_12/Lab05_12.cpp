@@ -5,7 +5,7 @@ using namespace std;
 fraction summa(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getznam() + b.getchisl() * a.getznam(), a.getznam() * b.getznam()); }
 fraction raznicha(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getznam() - b.getchisl() * a.getznam(), a.getznam() * b.getznam()); }
 fraction proizv(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getchisl(), a.getznam() * b.getznam()); }
-fraction delenie(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getznam(), a.getznam() * b.getchisl()); };
+fraction delenie(const fraction& a, const fraction& b) { return fraction(a.getchisl() * b.getznam(), a.getznam() * b.getchisl()); }
 
 int NOD(int a, int b)
 {

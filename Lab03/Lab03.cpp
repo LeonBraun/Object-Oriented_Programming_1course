@@ -15,9 +15,67 @@ struct employee
     dolzhnost dolzhnost_IN_STRUCT_employee;
 };
 
+void VvodDannihSotrudnika(employee& rab)
+{
+    static int kolvoSotrudnikov = 1;
+    char bukva, symbol;
+    cout << "\aCотрудник #" << kolvoSotrudnikov++ << endl;
+    cout << "Личный номер и зарплата: " && cin >> rab.numberEmployee >> rab.zarplata;
+    cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
+    cout << "Дата принятия на работу: " && cin >> rab.date_IN_STRUCT_employee.day >> symbol >> rab.date_IN_STRUCT_employee.month >> symbol >> rab.date_IN_STRUCT_employee.year;
+    switch (bukva)
+    {
+    case laborer:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::laborer;
+        break;
+    case secretary:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::secretary;
+        break;
+    case manager:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::manager;
+        break;
+    case accountant:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::accountant;
+        break;
+    case executive:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::executive;
+        break;
+    case researcher:
+        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::researcher;
+        break;
+    default:
+        cout << "Ошибка ввода!!!" << endl;
+        break;
+    }
+}
 
-void VvodDannihSotrudnika(employee& rab);
-string VivodPolnRabotaName(employee& rab);
+string VivodPolnRabotaName(employee& rab)
+{
+    switch (rab.dolzhnost_IN_STRUCT_employee)
+    {
+    case laborer:
+        return "laborer";
+        break;
+    case secretary:
+        return "secretary";
+        break;
+    case manager:
+        return "manager";
+        break;
+    case accountant:
+        return "accountant";
+        break;
+    case executive:
+        return "executive";
+        break;
+    case researcher:
+        return "researcher";
+        break;
+    default:
+        return "Ошибка ввода!!!";
+        break;
+    }
+}
 
 int main()
 {
@@ -221,66 +279,4 @@ int main()
             break;
         }
     } while (prodolzhenie == 'y');
-}
-
-void VvodDannihSotrudnika(employee& rab)
-{
-    static int kolvoSotrudnikov = 1;
-    char bukva, symbol;
-    cout << "\aCотрудник #" << kolvoSotrudnikov++ << endl;
-    cout << "Личный номер и зарплата: " && cin >> rab.numberEmployee >> rab.zarplata;
-    cout << "Введите первую букву должности (laborer, secretary, manager, accountant, executive, researcher): " && cin >> bukva;
-    cout << "Дата принятия на работу: " && cin >> rab.date_IN_STRUCT_employee.day >> symbol >> rab.date_IN_STRUCT_employee.month >> symbol >> rab.date_IN_STRUCT_employee.year;
-    switch (bukva)
-    {
-    case laborer:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::laborer;
-        break;
-    case secretary:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::secretary;
-        break;
-    case manager:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::manager;
-        break;
-    case accountant:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::accountant;
-        break;
-    case executive:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::executive;
-        break;
-    case researcher:
-        rab.dolzhnost_IN_STRUCT_employee = dolzhnost::researcher;
-        break;
-    default:
-        cout << "Ошибка ввода!!!" << endl;
-        break;
-    }
-}
-
-string VivodPolnRabotaName(employee& rab)
-{
-    switch (rab.dolzhnost_IN_STRUCT_employee)
-    {
-    case laborer:
-        return "laborer";
-        break;
-    case secretary:
-        return "secretary";
-        break;
-    case manager:
-        return "manager";
-        break;
-    case accountant:
-        return "accountant";
-        break;
-    case executive:
-        return "executive";
-        break;
-    case researcher:
-        return "researcher";
-        break;
-    default:
-        return "Ошибка ввода!!!";
-        break;
-    }
 }
